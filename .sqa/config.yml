@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.4
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/WORSICA/eosc-worsica-processing:
+      branch: main
+      repo: https://github.com/WORSICA/eosc-worsica-processing
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/WORSICA/eosc-worsica-processing git:
+        commands:
+        - /usr/bin/env sh .sqa/script.boozy-razzmatazz-yak.sh
+        container: qc.acc_squirrely-aqua-moorhen
+  QC.Doc:
+    repos:
+      github.com/WORSICA/eosc-worsica-processing find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.snazzy-ecru-eel.sh
+        container: qc.doc_dorky-lilac-hippopotamus
+      github.com/WORSICA/eosc-worsica-processing git:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-cardinal-boar.sh
+        container: qc.doc_dorky-thistle-tortoise
+      github.com/WORSICA/eosc-worsica-processing markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-pumpkin-lemming.sh
+        container: qc.doc_pokey-ruby-quetzal
+  QC.Lic:
+    repos:
+      github.com/WORSICA/eosc-worsica-processing licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-gold-chameleon.sh
+        container: qc.lic_tasty-green-discus
+  QC.Met:
+    repos:
+      github.com/WORSICA/eosc-worsica-processing cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-rose-stingray.sh
+        container: qc.met_wimpy-blue-avocet
+      github.com/WORSICA/eosc-worsica-processing validate_codemeta:
+        commands:
+        - /usr/bin/env sh .sqa/script.seedy-cardinal-crab.sh
+        container: qc.met_nippy-turquoise-dollar
+  QC.Sty:
+    repos:
+      github.com/WORSICA/eosc-worsica-processing jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.sickly-sepia-loon.sh
+        container: qc.sty_queasy-brass-ibis
+  QC.Ver:
+    repos:
+      github.com/WORSICA/eosc-worsica-processing get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.gummy-razzmatazz-fox.sh
+        container: qc.ver_skinny-platinum-chinook
+timeout: 1800
